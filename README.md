@@ -1,11 +1,36 @@
-<div align="center">
+# 台灣高鐵動態系統 (THSR Live) - React + TypeScript 版
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+依台灣高鐵〈2026/2/2 起適用時刻表〉，在台灣地圖上推算南港—左營 12 站之間每一班列車的即時運行位置，以 N700ST 新世代列車模型呈現。本專案已完全重構為現代化 **React 19 + TypeScript + Vite + Tailwind CSS** 單頁應用。
 
-  <h1>Built with AI Studio</h2>
+## 主要功能
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+- **依星期套用班表**：每日固定 131 班，其餘車次只在指定星期行駛，每天班次不同（週一 156、週二 149、週三 149、週四 158、週五 179、週六 161、週日 182）。
+- **即時與模擬模式**：預設精確對應台灣（Asia/Taipei）現在時間；支援星期切換、指定日期、時間軸拖曳（05:00 至次日 01:00），並以 1×–900× 速度模擬播放。凌晨 2 點前仍延續前一天班表，跨午夜末班車持續顯示。
+- **高精度向量地圖**：Centripetal Catmull-Rom 軌道曲線幾何運算、流暢平移與縮放（支援全島、全線、北部、中部、南部預設視野，及雙指縮放與拖曳）、動態比例尺；列車依實際靠左行駛，南下橘色、北上藍色，停靠站以虛框閃爍顯示。
+- **列車詳情面板**：包含 N700ST 向量側視圖、停靠與通過車站時間軸、下一站預估時間、物理加減速推算時速、行駛日標籤與地圖即時定位功能。
+- **車站看板 (Concourse Departure Board)**：12 站即時看板，顯示南下／北上即將出發的車次、時刻、終點站與倒數分鐘提示（含 5 分鐘內出發警示）。
+- **全線時刻表**：南下／北上切換、本日行駛篩選、車次即時搜尋、停靠與通過（↓）站標註，以及當前運行班次高亮顯示。
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## 技術架構
 
-</div>
+- **Framework**: React 19 + TypeScript
+- **Build Tool**: Vite 6
+- **Styling**: Tailwind CSS + Custom Design System (支援系統 Dark Mode / Light Mode)
+- **Data Engine**:
+  - `data/map.json`：投影簡化後之台灣縣市邊界與高鐵座標
+  - `data/timetable-2026-02-02.json`：官方時刻表 214 車次完整資料庫
+  - `src/utils/geo.ts`：座標投影、樣條曲線計算、車輛沿軌跡定位與速度曲線
+  - `src/utils/timetable.ts`：時刻表解析、狀態推算與時區同步
+
+## 開發與建置
+
+```bash
+# 安裝相依套件
+npm install
+
+# 啟動開發伺服器 (port 3000)
+npm run dev
+
+# 專案建置
+npm run build
+```

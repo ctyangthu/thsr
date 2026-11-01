@@ -1,0 +1,8 @@
+{
+  "name": "台灣高鐵動態系統 (THSR Live)",
+  "description": "台灣高鐵全線列車即時動態推算與模擬系統，呈現南港—左營 12 站列車運行位置、時速、車站看板與時刻表。",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
